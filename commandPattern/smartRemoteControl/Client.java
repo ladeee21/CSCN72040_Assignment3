@@ -12,14 +12,18 @@ public class Client {
         GarageDoor garageDoor   =  new GarageDoor();
         
         //COMMAND
-        AirConditionerOnCommand acOn = new AirConditionerOnCommand(ac);
-        AirConditionerOffCommand acOff = new AirConditionerOffCommand(ac);
-        GarageDoorOpenCommand doorOpen  = new GarageDoorOpenCommand(garageDoor);
-        GarageDoorCloseCommand doorClose  = new GarageDoorCloseCommand(garageDoor);
+        Command acOn = new UndoDecorator(new AirConditionerOnCommand(ac));
+        Command acOff = new UndoDecorator(new AirConditionerOffCommand(ac));
+        Command doorOpen = new UndoDecorator(new GarageDoorOpenCommand(garageDoor));
+        Command doorClose = new UndoDecorator(new GarageDoorCloseCommand(garageDoor));
         
         remote.setCommand(acOn);
         remote.buttonWasPressed();
+        remote.undoLastCommand();
         remote.setCommand(doorOpen);
+        remote.buttonWasPressed();
+        
+        remote.resetAllButtons();
         remote.buttonWasPressed();
     }
     

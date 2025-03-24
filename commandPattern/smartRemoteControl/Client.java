@@ -5,8 +5,6 @@ public class Client {
         // INVOKER (REMOTE CONTROL)
         SmartRemoteControl remote = new SmartRemoteControl();
         
-     
-
         // RECEIVERS
         AirConditioner ac = new AirConditioner();
         GarageDoor garageDoor = new GarageDoor();
@@ -45,5 +43,6 @@ public class Client {
         remote.buttonWasPressed(4); // Outdoor Light ON
         remote.buttonWasPressed(5);
         remote.buttonWasPressed(8);
+
     }
 }

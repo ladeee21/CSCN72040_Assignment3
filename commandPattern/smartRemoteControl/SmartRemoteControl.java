@@ -1,6 +1,8 @@
 package smartRemoteControl;
+import java.util.Stack;
 
 public class SmartRemoteControl {
+
     Command[] slots; // Array of commands
 
     public SmartRemoteControl() {
@@ -23,3 +25,4 @@ public class SmartRemoteControl {
         }
     }
 }
+

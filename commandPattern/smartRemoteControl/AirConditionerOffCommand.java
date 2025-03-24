@@ -10,4 +10,9 @@ AirConditioner ac;
     public void execute(){
         ac.off();
     }
+    
+    @Override
+    public void undo() {
+        ac.on();
+    }
 }

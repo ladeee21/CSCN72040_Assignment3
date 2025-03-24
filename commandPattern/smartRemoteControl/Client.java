@@ -5,8 +5,6 @@ public class Client {
         // INVOKER (REMOTE CONTROL)
         SmartRemoteControl remote = new SmartRemoteControl();
         
-     
-
         // RECEIVERS
         AirConditioner ac = new AirConditioner();
         GarageDoor garageDoor = new GarageDoor();
@@ -15,14 +13,14 @@ public class Client {
         Unused unusedCall = new Unused();
 
         // COMMANDS
-        AirConditionerOnCommand acOn = new AirConditionerOnCommand(ac);
-        AirConditionerOffCommand acOff = new AirConditionerOffCommand(ac);
-        GarageDoorOpenCommand doorOpen = new GarageDoorOpenCommand(garageDoor);
-        GarageDoorCloseCommand doorClose = new GarageDoorCloseCommand(garageDoor);
-        LightOnCommand livingRoomLightOn = new LightOnCommand(livingRoomLight);
-        LightOffCommand livingRoomLightOff = new LightOffCommand(livingRoomLight);
-        LightOnCommand outdoorLightOn = new LightOnCommand(outdoorLight);
-        LightOffCommand outdoorLightOff = new LightOffCommand(outdoorLight);
+        Command acOn = new UndoDecorator(new AirConditionerOnCommand(ac));
+        Command acOff = new UndoDecorator(new AirConditionerOffCommand(ac));
+        Command doorOpen = new UndoDecorator(new GarageDoorOpenCommand(garageDoor));
+        Command doorClose = new UndoDecorator(new GarageDoorCloseCommand(garageDoor));
+        Command livingRoomLightOn = new UndoDecorator(new LightOnCommand(livingRoomLight));
+        Command livingRoomLightOff = new UndoDecorator(new LightOffCommand(livingRoomLight));
+        Command outdoorLightOn = new UndoDecorator(new LightOnCommand(outdoorLight));
+        Command outdoorLightOff = new UndoDecorator(new LightOffCommand(outdoorLight));
         
 
         Light[] allLights = {livingRoomLight, outdoorLight};
@@ -40,10 +38,14 @@ public class Client {
 
         // EXECUTE COMMANDS USING BUTTON PRESS
         remote.buttonWasPressed(1);
+        remote.undoLastCommand(); //undo ac on (ac off)
         remote.buttonWasPressed(2);
         remote.buttonWasPressed(3); // Living Room Light ON
         remote.buttonWasPressed(4); // Outdoor Light ON
         remote.buttonWasPressed(5);
         remote.buttonWasPressed(8);
+        remote.resetAllButtons();
+        remote.buttonWasPressed(4);
+
     }
 }

@@ -11,5 +11,10 @@ public class UnusedSlotCall implements Command {
 	public void execute() {
 		Call.call();
 	}
+	
+	 @Override
+	    public void undo() {
+	    	return;
+	    }
 
 }

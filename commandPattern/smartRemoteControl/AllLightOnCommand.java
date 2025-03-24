@@ -14,4 +14,11 @@ public class AllLightOnCommand implements Command{
         }
     }
 	
+	 @Override
+	    public void undo() {
+	    	for(Light light: lights) {
+				light.off();
+			}
+	    }
+	
 }

@@ -10,4 +10,9 @@ public class AirConditionerOnCommand implements Command {
     public void execute(){
         ac.on();
     }
+    
+    @Override
+    public void undo() {
+        ac.off();
+    }
 }
